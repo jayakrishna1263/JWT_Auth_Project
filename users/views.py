@@ -8,7 +8,7 @@ from .serializers import CustomUserSerializer,MyObtainTokenSerializer
 from .permissions import ClientPermission,AdminPermission
 
 class ClientListViewSet(ModelViewSet):
-    permission_classes = [IsAuthenticated,ClientPermission]
+    permission_classes = [IsAuthenticated,ClientPermission | AdminPermission]
 
     queryset=CustomUser.objects.filter(user_type="Client")
     serializer_class=CustomUserSerializer

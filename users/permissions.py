@@ -13,6 +13,10 @@ class ClientPermission(permissions.BasePermission):
     def has_permission(self,request,view):
         print(request.user)
         if request.user.is_authenticated:
-            if request.user.user_type=="Client":
-                return True
+            return request.user.user_type == 'Client' and view.action != 'create'
         return False
+        
+                
+
+    def has_object_permission(self, request, view, obj):
+        return request.user==obj
